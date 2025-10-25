@@ -1,0 +1,55 @@
+# docker-compose.yml
+version: "3.8"
+
+services:
+  # Servicio de Base de Datos MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Mapea puerto local a puerto del contenedor (útil para debug)
+    volumes:
+      - mongo-data:/data/db # Persistencia de datos
+    networks:
+      - neoamazon-net
+
+  # Servicio del Backend (Node.js)
+  backend:
+    build: ./backend # Le dice a Docker que construya usando el Dockerfile en ./backend
+    container_name: backend
+    ports:
+      - "5000:5000" # Mapea el puerto del host al contenedor
+    volumes:
+      - ./backend:/usr/src/app # Monta el código local para hot-reloading
+      - /usr/src/app/node_modules # Evita que node_modules local sobrescriba el del contenedor
+    environment:
+      # MUY IMPORTANTE: Usamos el nombre del servicio 'mongodb' para conectar
+      - MONGO_URI=mongodb://mongodb:27017/NeoAmazonDB
+      - PORT=5000
+    depends_on:
+      - mongodb # El backend no arrancará hasta que mongodb esté listo
+    networks:
+      - neoamazon-net
+
+  # Servicio del Frontend (React servido por Nginx)
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80" # Accederemos a la app en http://localhost
+    # Nota: No usamos 'volumes' para el código fuente aquí
+    # porque Nginx sirve archivos estáticos (construidos).
+    # Si quieres hot-reloading en React (dev), la config es más compleja (usando Vite HMR).
+    depends_on:
+      - backend
+    networks:
+      - neoamazon-net
+
+# Definición de volúmenes (para persistencia de datos de la DB)
+volumes:
+  mongo-data:
+
+# Definición de la red (para que los contenedores se comuniquen)
+networks:
+  neoamazon-net:
+    driver: bridge
