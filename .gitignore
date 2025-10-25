@@ -1,0 +1,19 @@
+# .gitignore
+
+# Dependencias
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# Archivos de entorno
+.env
+.env.local
+
+# Construcciones (Builds)
+dist/
+build/
+
+# Archivos del SO
+.DS_Store
+Thumbs.db
