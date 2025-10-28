@@ -8,6 +8,7 @@ const ProductSchema = new Schema(
     price: { type: Number, required: true },
     stock: { type: Number, required: true },
     category: { type: String, required: true },
+    attributes: { type: Schema.Types.Mixed, default: {} },
   },
   { timestamps: true }
 );

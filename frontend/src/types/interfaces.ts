@@ -5,5 +5,6 @@ export interface IProduct {
   price: number;
   stock: number;
   category: string;
+  attributes: Record<string, unknown>;
   createdAt: string;
 }
