@@ -2,10 +2,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const homepage: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
-    // Usa clases de Tailwind para centrar y dar un buen aspecto
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-100 p-6">
+    // --- CLASES DE FONDO Y ALTURA ELIMINADAS DE AQUÍ ---
+    // 'p-6' está bien, pero el resto lo controla App.tsx
+    <div
+      className="flex flex-col items-center justify-center p-6"
+      style={{ minHeight: "calc(100vh - 64px)" }}
+    >
+      {" "}
+      {/* 64px es un alto de navbar aprox. */}
       <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 text-center leading-tight">
         Bienvenido a <span className="text-indigo-600">NeoAmazon</span>
       </h1>
@@ -26,4 +32,4 @@ const homepage: React.FC = () => {
   );
 };
 
-export default homepage;
+export default HomePage;
