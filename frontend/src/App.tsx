@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import ProductListPage from "./pages/ProductListPage";
 import HomePage from "./pages/HomePage"; // Asegúrate que el nombre de archivo sea HomePage.tsx
-import Navbar from "./components/Navbar"; // Asegúrate que el nombre de archivo sea Navbar.tsx
+import Navbar from "./components/NavBar"; // Asegúrate que el nombre de archivo sea Navbar.tsx
 
 const App: React.FC = () => {
   return (
