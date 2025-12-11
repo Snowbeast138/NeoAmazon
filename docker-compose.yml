@@ -22,6 +22,7 @@ services:
     volumes:
       - ./backend:/usr/src/app # Monta el código local para hot-reloading
       - /usr/src/app/node_modules # Evita que node_modules local sobrescriba el del contenedor
+      - ./proto:/usr/src/app/proto
     environment:
       # MUY IMPORTANTE: Usamos el nombre del servicio 'mongodb' para conectar
       - MONGO_URI=mongodb://mongodb:27017/NeoAmazonDB
@@ -44,6 +45,19 @@ services:
       - backend
     networks:
       - neoamazon-net
+
+  cart-service:
+    build: ./cart-service
+    container_name: cart-service
+    ports: ["50052:50052"]
+    depends_on: [mongodb]
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/NeoAmazonDB
+    volumes:
+      - ./cart-service:/app
+      - /app/node_modules
+      - ./proto:/app/proto # <--- IMPORTANTE: Comparte el proto
+    networks: [neoamazon-net]
 
 # Definición de volúmenes (para persistencia de datos de la DB)
 volumes:

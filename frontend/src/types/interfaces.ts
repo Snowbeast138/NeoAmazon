@@ -8,3 +8,17 @@ export interface IProduct {
   attributes: Record<string, unknown>;
   createdAt: string;
 }
+
+export interface ICartItem {
+  productId: string;
+  productName: string;
+  price: number;
+  quantity: number;
+  subtotal: number;
+}
+
+export interface ICart {
+  userId: string;
+  items: ICartItem[];
+  total: number;
+}

@@ -1,0 +1,99 @@
+/* frontend/src/Auth.css */
+
+/* Fondo general de la página */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Restamos el navbar */
+  background-color: #f0f9ff; /* Un azul muy suave */
+  padding: 1rem;
+}
+
+/* La tarjeta (Card) */
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Para que el header no se salga de las esquinas redondeadas */
+  border: 1px solid #e5e7eb;
+}
+
+/* El encabezado con degradado */
+.auth-header {
+  background: linear-gradient(to right, #2563eb, #06b6d4); /* Azul a Cyan */
+  padding: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.auth-header h2 {
+  margin: 0;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.auth-header p {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  color: #cffafe; /* Cyan muy claro */
+  font-weight: 500;
+}
+
+/* El cuerpo del formulario */
+.auth-body {
+  padding: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #4b5563; /* Gris oscuro */
+  font-size: 0.875rem;
+}
+
+/* Estilos para input groups de PrimeReact */
+.p-inputgroup-addon {
+  background-color: #f9fafb !important;
+  border-color: #d1d5db !important;
+  color: #9ca3af !important;
+}
+
+.auth-btn {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #2563eb !important; /* Azul fuerte */
+  border: none !important;
+}
+
+.auth-btn:hover {
+  background-color: #1d4ed8 !important; /* Azul más oscuro al hover */
+}
+
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f3f4f6;
+  color: #6b7280;
+}
+
+.auth-link {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}

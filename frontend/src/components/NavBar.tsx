@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Menubar } from "primereact/menubar";
 import type { MenuItem } from "primereact/menuitem";
 
+import { useAuth } from "../context/AuthContext";
 import logo from "../assets/NeoAmazonLogo.png"; // Asegúrate de tener un logo en esta ruta
+import { Button } from "primereact/button";
 
 const Navbar: React.FC = () => {
   // Usamos useNavigate() para la navegación, es más limpio
   const navigate = useNavigate();
+  const { user, logout, isAuthenticated } = useAuth();
 
   // 1. Definimos los items del menú
   const items: MenuItem[] = [
@@ -21,6 +24,11 @@ const Navbar: React.FC = () => {
       label: "Productos",
       icon: "pi pi-shopping-bag",
       command: () => navigate("/products"),
+    },
+    {
+      label: "Mi Carrito",
+      icon: "pi pi-shopping-cart",
+      command: () => navigate("/cart"),
     },
     // Puedes añadir más aquí
     // {
@@ -40,6 +48,44 @@ const Navbar: React.FC = () => {
     </div>
   );
 
+  const end = (
+    <div className="flex align-items-center gap-2">
+      {isAuthenticated && user ? (
+        // Si está logueado
+        <>
+          <span className="text-gray-300 mr-2 hidden md:inline">
+            Hola, <b>{user.name}</b>
+          </span>
+          <Button
+            label="Salir"
+            icon="pi pi-power-off"
+            severity="danger"
+            text
+            size="small"
+            onClick={logout}
+          />
+        </>
+      ) : (
+        // Si NO está logueado
+        <>
+          <Button
+            label="Login"
+            icon="pi pi-user"
+            text
+            className="text-white"
+            onClick={() => navigate("/login")}
+          />
+          <Button
+            label="Registro"
+            severity="info"
+            size="small"
+            onClick={() => navigate("/register")}
+          />
+        </>
+      )}
+    </div>
+  );
+
   return (
     // 3. Renderizamos el Menubar
     // Le aplicamos las clases de Tailwind para darle el color de fondo
@@ -47,6 +93,7 @@ const Navbar: React.FC = () => {
       <Menubar
         model={items}
         start={start}
+        end={end}
         className="bg-gray-800 rounded-none border-none p-4"
         // PrimeReact usa "pt (pass-through)" para estilizar partes internas
         // Esto es para que los links del menú también sean blancos
